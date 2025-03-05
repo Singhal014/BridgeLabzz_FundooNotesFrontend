@@ -1,0 +1,76 @@
+.navbar {
+  background-color: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 80px; // Fixed height for consistency
+  position: fixed; // Fix navbar to the top
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; // Ensure it's above other content
+
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; // Ensure toolbar takes full height
+  }
+
+  .logo {
+    font-weight: bold;
+    color: #5f6368;
+    margin-right: 20px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f4; // Light grey like Google Keep
+    padding: 5px 12px;
+    border-radius: 8px;
+    width: 40%; // Default width
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+
+    svg {
+      color: #5f6368;
+      margin-right: 8px;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: black;
+      font-size: 16px;
+      width: 100%;
+
+      &::placeholder {
+        color: #9aa0a6;
+      }
+    }
+  }
+
+  .MuiIconButton-root {
+    color: #5f6368;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    .search {
+      width: 60%; // Increase width on smaller screens
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    .search {
+      width: 80%; // Further increase width on very small screens
+    }
+  }
+}

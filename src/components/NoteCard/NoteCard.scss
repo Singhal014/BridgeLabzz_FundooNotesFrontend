@@ -1,0 +1,50 @@
+.note-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  width: 250px; 
+  min-height: 100px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Title Styling */
+  .note-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  /* Description Styling */
+  .note-description {
+    font-size: 14px;
+    color: #555;
+    flex-grow: 1;
+  }
+
+  /* Icons Container */
+  .note-actions {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover .note-actions {
+    opacity: 1;
+  }
+}
