@@ -1,23 +1,42 @@
-.sidebar {
-  width: 250px !important;
-  flex-shrink: 0;
-  background-color: white;
-  height: 100vh; // Full viewport height
-  border-right: 1px solid #ddd;
-  position: fixed;
-  left: 0;
-  top: 0;
-  overflow: hidden; // Prevents unwanted scrolling
+.sidebar-main {
+    height: calc(100vh - 64px); 
+    position: fixed;
+    top: 64px; 
+    left: 0;
+    transition: width 0.3s ease;
 
-  .MuiDrawer-paper {
-    width: 250px ;
-    background-color: white;
-    height: calc(100vh - 80px); // Adjust for navbar height
-    padding-top: 80px; // Space for navbar
-    overflow: hidden; // Prevents overflow scrolling
-  }
+    &.expanded {
+        width: 250px;
+    }
 
-  .icon {
-    margin-right: 20px;
-  }
+    &.collapsed {
+        width: 65px;
+
+        .MuiListItemText-root {
+            display: none;
+        }
+    }
+
+    .MuiDrawer-paper {
+        width: inherit;
+        height: calc(100vh - 64px);
+        top: 64px !important;
+        transition: width 0.3s ease-in-out;
+    }
+}
+
+.MuiListItem-root {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+
+    &:hover {
+        background-color: #f1f3f4;
+        border-radius: 0 25px 25px 0;
+    }
+}
+
+.MuiListItemIcon-root {
+    color: #5f6368;
 }

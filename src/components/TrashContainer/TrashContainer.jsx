@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Box, Typography } from "@mui/material";
-import Navbar from "../Navbar/Navbar";
-import Sidebar from "../Sidebar/Sidebar";
 import NoteCard from "../NoteCard/NoteCard";
-import { getTrashedNotesApiCall } from "../../utils/Api";
+import { getTrashedNotesApiCall } from "../../services/api";
 import { SearchQuery } from "../../App";
 import "./TrashContainer.scss";
 
@@ -12,17 +10,22 @@ const TrashContainer = () => {
   const searchQuery = useContext(SearchQuery);
 
   useEffect(() => {
-    getTrashedNotesApiCall()
-      .then((response) => {
-        console.log("Fetched trash notes:", response.data.data);
-        setTrashNotes(response.data.data || []);
-      })
-      .catch((error) => console.error("Error fetching trash notes:", error));
+    fetchTrashNotes();
   }, []);
 
-  const handleUpdateList = (noteId, action) => {
+  const fetchTrashNotes = async () => {
+    try {
+      const response = await getTrashedNotesApiCall();
+      console.log("Fetched trash notes:", response.data.data);
+      setTrashNotes(response.data.data || []);
+    } catch (error) {
+      console.error("Error fetching trash notes:", error);
+    }
+  };
+
+  const handleUpdateList = async (noteId, action) => {
     if (action === "restore" || action === "delete") {
-      setTrashNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteId));
+      await fetchTrashNotes(); 
     }
   };
 
@@ -34,8 +37,6 @@ const TrashContainer = () => {
 
   return (
     <Box className="note-container">
-      <Sidebar />
-      <Navbar />
       <Typography variant="h5" className="trash-header">
         Trash
       </Typography>

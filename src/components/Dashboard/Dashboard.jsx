@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { Box, CssBaseline } from "@mui/material";
+import NavBar from "../NavBar/NavBar";
+import Sidebar from "../SideBar/SideBar";
 import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import Sidebar from "../Sidebar/Sidebar";
-import "./Dashboard.scss";
+import "./DashBoard.scss";
 
-const Dashboard = () => {
-  return (
-    <div className="dashboard">
-      <Navbar />
-      <Sidebar />
-      <main className="content">
-        <Outlet /> 
-      </main>
-    </div>
-  );
+const DashBoard = () => {
+    const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+
+    const toggleSidebar = () => setIsSidebarExpanded(!isSidebarExpanded);
+
+    return (
+        <>
+            <CssBaseline />
+            <NavBar toggleSidebar={toggleSidebar} />
+
+            <Box className="dashboard-container">
+                <Sidebar isExpanded={isSidebarExpanded} />
+                <Box className={`content ${isSidebarExpanded ? "expanded" : "collapsed"}`}>
+                    <Outlet />
+                </Box>
+            </Box>
+        </>
+    );
 };
 
-export default Dashboard;
+export default DashBoard;

@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.app-container {
+  display: flex;
+}
+
+.content-main {
+  margin-top: 64px; /* Push content below Navbar */
+  margin-left: 250px; /* Space for Sidebar */
+  padding: 20px;
+  width: calc(100% - 250px); /* Adjust width dynamically */
+}
+
