@@ -14,8 +14,10 @@ api.interceptors.request.use((config) => {
 
 export const loginApiCall = (payload) => api.post("/users/login", payload);
 export const signApiCall = (payload) => api.post("/users", payload);
+
 export const addNoteApiCall = (payload) => api.post("/notes", payload);
 export const getNotesApiCall = () => api.get("/notes");
+export const updateNoteApiCall = (noteId, payload) => api.put(`/notes/${noteId}`, payload);
 
 export const getTrashedNotesApiCall = () => api.get("/notes/trashed");
 export const getArchivedNotesApiCall = () => api.get("/notes/archived");

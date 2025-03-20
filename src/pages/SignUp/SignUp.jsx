@@ -3,20 +3,28 @@ import { Button, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.scss';
 import { signApiCall } from '../../services/api';
+import SignLogo from "../../assets/images.jpeg"; 
+
 
 export const SignUp = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSignup = async () => {
         setError('');
 
-        if (!firstName || !lastName || !email || !password) {
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
             setError('All fields are required');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
             return;
         }
 
@@ -24,7 +32,7 @@ export const SignUp = () => {
             const response = await signApiCall({ firstName, lastName, email, password });
 
             if (response.data && response.data.token) {
-                localStorage.setItem('accessToken', response.data.token); 
+                localStorage.setItem('accessToken', response.data.token);
 
                 console.log('Signup successful, redirecting...');
                 navigate('/dashboard');
@@ -79,8 +87,20 @@ export const SignUp = () => {
                         variant="outlined"
                         fullWidth
                         className="SignUp-input"
+                        margin="normal"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <TextField
+                        label="Confirm Password*"
+                        type="password"
+                        variant="outlined"
+                        fullWidth
+                        className="SignUp-input"
+                        margin="normal"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
 
                     <div className="actions">
@@ -96,10 +116,8 @@ export const SignUp = () => {
                 </div>
 
                 <div className='SignUp-image'>
-                    <img
-                        src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcReaCm5ivh8Pe-MeVsBJxTxnS6B3LXV6tCKSeDGPuMG-G1cUb3C"
-                        alt="Image error"
-                    />
+                <img src={SignLogo} alt="Sign Logo" className="logo" />
+
                     <div className='img-footer'>
                         <p>
                             One account. <br />

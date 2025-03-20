@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { Paper, TextField, Button } from "@mui/material";
+import { Paper, TextField, IconButton, Button } from "@mui/material";
+import ArchiveIcon from "@mui/icons-material/Archive";
+import ColorLensIcon from "@mui/icons-material/ColorLens";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { addNoteApiCall } from "../../services/api";
 import "./AddNote.scss";
 
@@ -14,7 +17,7 @@ const AddNote = ({ onAdd }) => {
     const handleClose = async () => {
         if (note.title.trim() && note.description.trim()) {
             try {
-                const response = await addNoteApiCall(note);
+                const response = await addNoteApiCall(note); 
                 console.log("API Response:", response);
 
                 const createdNote = response.data?.Data;
@@ -52,7 +55,20 @@ const AddNote = ({ onAdd }) => {
                         multiline
                     />
                     <div className="actions">
-                        <Button onClick={handleClose} size="small">Close</Button>
+                        <div className="icons">
+                            <IconButton size="small">
+                                <ArchiveIcon fontSize="small" />
+                            </IconButton>
+                            <IconButton size="small">
+                                <ColorLensIcon fontSize="small" />
+                            </IconButton>
+                            <IconButton size="small">
+                                <PersonAddIcon fontSize="small" />
+                            </IconButton>
+                        </div>
+                        <Button onClick={handleClose} size="small">
+                            Close
+                        </Button>
                     </div>
                 </>
             ) : (
